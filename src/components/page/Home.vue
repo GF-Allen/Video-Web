@@ -1,14 +1,10 @@
 <template>
-    <div class="gridlist-video-container">
-        <mu-grid-list class="gridlist-video" :cols="cols" :padding="10">
-            <mu-grid-tile v-for="tile, index in list" :key="index">
-                <img :src="tile.image" />
-                <span slot="title">{{tile.title}}</span>
-                <span slot="subTitle">by
-                    <b>{{tile.author}}</b>
-                </span>
-                <mu-icon-button icon="star_border" slot="action" />
-            </mu-grid-tile>
+    <div class="video-content">
+        <!-- Least Gallery -->
+        <mu-grid-tile v-for="item, index in list" :key="index">
+            <img :src="tile.cover_img" />
+            <span slot="title">{{tile.title}}</span>
+        </mu-grid-tile>
         </mu-grid-list>
     </div>
 </template>
@@ -28,7 +24,7 @@ export default {
         if (width < 640) {
             this.cols = 2;
         }
-        axios.get('http://106.14.152.232/video/home/2/1')
+        axios.get('/video/home/2/1')
             .then(result => {
                 this.list = result.data.result;
             })
@@ -36,15 +32,27 @@ export default {
 
             })
     }
-
 }
+
+$(document).ready(function() {
+    $('.list-video').least();
+});
+
 </script>
 
 <style>
-.gridlist-video-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+.video-content {
+    margin-top: 10px;
+}
+
+.list-video li {
+    display: inline;
+    margin: 10px;
+}
+
+.list-video li img {
+    width: 200px;
+    height: 300px;
 }
 
 .gridlist-video {

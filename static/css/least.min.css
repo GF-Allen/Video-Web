@@ -1,0 +1,252 @@
+@charset "UTF-8";
+/**
+*** least.js 2
+*** Author: Kamil Czujowski - @kamilczujowski
+*** Version: 2.2
+*** Made with ♥	in Hamburg, Germany.
+*** http://kamilczujowski.de
+**/
+/* @group Import */
+/**
+*** least.js 2
+*** Author: Kamil Czujowski - @kamilczujowski
+*** Version: 2.2.0
+*** Made with ♥	in Hamburg, Germany.
+*** http://kamilczujowski.de
+**/
+/* @group BASE */
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+img {
+  border: 0;
+}
+
+/* @end */
+/**
+*** least.js 2
+*** Author: Kamil Czujowski - @kamilczujowski
+*** Version: 2.2.0
+*** Made with ♥ in Hamburg, Germany.
+*** http://kamilczujowski.de
+**/
+/* @group Mixins */
+/* @end */
+/**
+*** least.js 2
+*** Author: Kamil Czujowski - @kamilczujowski
+*** Version: 2.2.0
+*** Made with ♥	in Hamburg, Germany.
+*** http://kamilczujowski.de
+**/
+/* @group Options */
+/* @group Master */
+/* enable (true) or disable (false) thumbnails title text */
+/* enable (true) or disable (false) thumbnails border */
+/* @end */
+/* @group Vars: Colors */
+/* @end */
+/* @group Gallery-Fullscreen */
+/* default size for fullscreen preview  */
+/* @end */
+/* @group Gallery-Thumbails */
+/* default "width" size for thumbnails */
+/* default "height" size for thumbnails */
+/* @end */
+/* @end */
+/**
+*** least.js 2
+*** Author: Kamil Czujowski - @kamilczujowski
+*** Version: 2.2.0
+*** Made with ♥ in Hamburg, Germany.
+*** http://kamilczujowski.de
+**/
+/* @group Gallery */
+#least {
+  min-width: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0 0 30px 0;
+  position: relative;
+  text-align: center;
+  /* @group Fullimage */
+  /* @end */
+  /* @group Smallimages */
+}
+#least .least-preview {
+  background-color: whitesmoke;
+  border-bottom: 2px solid;
+  border-color: #f1f0f0;
+  padding: 50px 0;
+  margin-bottom: 30px;
+  display: none;
+  /* important for Slide-Down Effect */
+}
+#least .least-preview img {
+  width: 100%;
+  max-width: 960px;
+  /* default width: 960px - to edit go to assets/options */
+  margin: 0 auto;
+  display: block;
+}
+#least .least-preview .close {
+  background-size: 100%;
+  background-image: url("../img/close.svg");
+  width: 30px;
+  height: 30px;
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+#least .least-preview article {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: left;
+  position: relative;
+  top: 20px;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+}
+#least .least-preview article strong {
+  font-weight: 800;
+}
+#least .least-gallery {
+  font-size: 0;
+}
+#least .least-gallery li {
+  position: relative;
+  vertical-align: top;
+  display: inline-block;
+  margin: 0 10px 10px 0;
+  /* @end */
+}
+#least .least-gallery li a {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  width: 240px;
+  /* Default width: 240px: to edit go to assets/options */
+  height: 150px;
+  /* Default height: 150px: to edit go to assets/options */
+  /* @group Outline */
+  -webkit-transition-property: outline-color;
+  -webkit-transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-in-out;
+  -moz-transition-property: outline-color;
+  -moz-transition-duration: 0.3s;
+  -moz-transition-timing-function: ease-in-out;
+  -ms-transition-property: outline-color;
+  -ms-transition-duration: 0.3s;
+  -ms-transition-timing-function: ease-in-out;
+  -o-transition-property: outline-color;
+  -o-transition-duration: 0.3s;
+  -o-transition-timing-function: ease-in-out;
+  transition-property: outline-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+  -webkit-backface-visibility: hidden;
+  outline-color: white;
+  /* @end */
+}
+#least .least-gallery li a img {
+  width: 240px;
+  /* Default width: 240px: to edit go to assets/options */
+  height: 150px;
+  /* Default height: 150px: to edit go to assets/options */
+}
+#least .least-gallery li a.active {
+  outline: 2px solid;
+  outline-color: #666666;
+}
+#least .least-gallery li a.load:after {
+  content: url("../img/loading.svg");
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  right: 20px;
+  z-index: 2;
+  overflow: hidden;
+  margin: -20px 0 0 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: white;
+  text-shadow: 1px 1px 1px #666666;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 30px;
+  line-height: 30px;
+  font-weight: 800;
+}
+#least .least-gallery li a:hover {
+  /* @group Outline */
+  outline: 2px solid;
+  outline-color: #666666;
+  /* @end */
+  /* @group Thumbnail Text */
+  /* @end */
+}
+#least .least-gallery li a:hover:before {
+  content: attr(data-subtitle);
+  /* Default text: "View Picture" - to edit go change the attr. "data-subtitle" */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  overflow: hidden;
+  letter-spacing: 1px;
+  color: white;
+  text-shadow: 1px 1px 1px #666666;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 175px;
+  font-weight: 200;
+  width: 240px;
+  /* Default width: 240px: to edit go to assets/options */
+  height: 150px;
+  /* Default height: 150px: to edit go to assets/options */
+  background: black;
+  background: rgba(0, 0, 0, 0.5);
+}
+#least .least-gallery li a:hover:after {
+  content: attr(title);
+  /* Default text: your a "title"-tag */
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  right: 20px;
+  z-index: 2;
+  overflow: hidden;
+  margin: -30px 0 0 0;
+  border-bottom: 2px solid;
+  border-color: white;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 1px #666666;
+  letter-spacing: 1px;
+  color: white;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 600;
+}
+
+/* end */
+/* @end group */
+
+/*# sourceMappingURL=least.min.css.map */
