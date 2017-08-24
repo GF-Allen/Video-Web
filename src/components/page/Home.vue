@@ -1,10 +1,10 @@
 <template>
     <div class="video-content">
-        <!-- Least Gallery -->
-        <mu-grid-tile v-for="item, index in list" :key="index">
-            <img :src="tile.cover_img" />
-            <span slot="title">{{tile.title}}</span>
-        </mu-grid-tile>
+        <mu-grid-list class="gridlist-demo">
+            <mu-grid-tile v-for="item, index in list" :key="index" >
+                <img :src="item.cover_img" />
+                <span slot="title">{{item.title}}</span>
+            </mu-grid-tile>
         </mu-grid-list>
     </div>
 </template>
@@ -34,30 +34,17 @@ export default {
     }
 }
 
-$(document).ready(function() {
-    $('.list-video').least();
-});
-
 </script>
 
 <style>
 .video-content {
-    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
-.list-video li {
-    display: inline;
-    margin: 10px;
-}
-
-.list-video li img {
-    width: 200px;
-    height: 300px;
-}
-
-.gridlist-video {
-    width: 95%;
+.gridlist-demo {
+    width: 1280px;
     height: auto;
-    overflow-y: auto;
 }
 </style>

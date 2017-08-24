@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <titleBar></titleBar>
-    <router-view></router-view>
-    <div class="footer">
-      Video Lines ©2017 Created by Richard Liu
-    </div>
+    <top></top>
+    <!-- <router-view></router-view> -->
+    <foot></foot>
   </div>
 </template>
 
 <script>
-import titleBar from '@/components/common/TitleBar'
+import Top from './components/common/Header.vue'
+import Foot from './components/common/Footer.vue'
 export default {
   name: 'app',
   components: {
-    titleBar
+    Top,
+    Foot
   }
 }
 </script>
