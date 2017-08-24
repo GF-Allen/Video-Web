@@ -1,15 +1,19 @@
 import Vue from "vue";
 import Router from "vue-router";
-import TabBar from "@/components/common/TabBar";
+import Home from "@/components/page/Home";
 
 Vue.use(Router);
 
 export default new Router({
-  routes: [
-    {
-      path: "/",
-      name: "TabBar",
-      component: TabBar
-    }
-  ]
+    mode: "history",
+    routes: [{
+            path: "/home/1",
+            alias: "/",
+            component: Home
+        },
+        {
+            path: '/home/:id',
+            component: Home
+        }
+    ]
 });

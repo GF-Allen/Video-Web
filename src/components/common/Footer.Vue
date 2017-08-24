@@ -1,25 +1,33 @@
 <template>
-    <mt-tabbar v-model="selected">
+    <mt-tabbar fixed v-model="selected" v-if="footerHide">
         <mt-tab-item id="type_1">
             <i slot="icon" class="icon iconfont icon-emoji-3"></i> 电影
+            <router-link to="/home/1"></router-link>
         </mt-tab-item>
         <mt-tab-item id="type_2">
             <i slot="icon" class="icon iconfont icon-emoji-2"></i> 电视
+            <router-link to="/home/2"></router-link>
         </mt-tab-item>
+
         <mt-tab-item id="type_3">
             <i slot="icon" class="icon iconfont icon-emoji-1"></i> 综艺
+            <router-link to="/home/3"></router-link>
         </mt-tab-item>
+
         <mt-tab-item id="type_4">
             <i slot="icon" class="icon iconfont icon-emoji-4"></i> 动漫
+            <router-link to="/home/4"></router-link>
         </mt-tab-item>
+
     </mt-tabbar>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
-    name: "TabBar",
+    name: "Footer",
     data() {
         return {
-            selected: "type_1",
+            selected: 'type_1',
             title: {
                 "type_1": "电影",
                 "type_2": "电视",
@@ -29,6 +37,9 @@ export default {
         }
     },
     computed: {
+        ...mapGetters([
+            'footerHide'
+        ]),
         selectTitle: function() {
             return this.title[this.selected]
         }

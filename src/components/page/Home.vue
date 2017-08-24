@@ -1,11 +1,13 @@
 <template>
     <div class="video-content">
-        <mu-grid-list class="gridlist-demo">
-            <mu-grid-tile v-for="item, index in list" :key="index" >
-                <img :src="item.cover_img" />
-                <span slot="title">{{item.title}}</span>
-            </mu-grid-tile>
-        </mu-grid-list>
+        <mt-tab-container class="page-tabbar-container">
+            <ul>
+                <li v-for="item, index in list" :key="index">
+                    <img :src="item.cover_img" />
+                    <span slot="title">{{item.title}}</span>
+                </li>
+            </ul>
+        </mt-tab-container>
     </div>
 </template>
 
@@ -43,8 +45,16 @@ export default {
     justify-content: space-around;
 }
 
-.gridlist-demo {
-    width: 1280px;
-    height: auto;
+.page-tabbar-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.page-tabbar-container ul{
+    list-style: none;
+}
+
+.page-tabbar-container ul li{
+
 }
 </style>

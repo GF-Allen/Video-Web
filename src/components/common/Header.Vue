@@ -1,5 +1,5 @@
 <template>
-  <mt-header fixed title="电影">
+  <mt-header fixed title="电影" v-if="headerHide">
     <router-link to="/" slot="left">
       <img src="/static/img/logo.png" alt="">
     </router-link>
@@ -7,10 +7,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'head',
   computed: {
-
+    ...mapGetters([
+      'headerHide'
+    ])
   }
 }
 </script>
@@ -22,7 +25,6 @@ export default {
   line-height: 48px;
   color: #333;
   box-shadow: 0px 2px 3px #EAEAEA;
-  text-align: left;
   font-size: 16px;
   color: #666;
 
@@ -34,8 +36,8 @@ export default {
     padding-left: 10px;
   }
   img {
-    margin-top: 4px;
-    height: 42px;
+    margin-top: 8px;
+    height: 32px;
   }
 }
 </style>

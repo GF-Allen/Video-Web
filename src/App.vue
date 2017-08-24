@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <top></top>
-    <!-- <router-view></router-view> -->
+    <router-view></router-view>
     <foot></foot>
   </div>
 </template>
@@ -14,17 +14,26 @@ export default {
   components: {
     Top,
     Foot
+  },
+  methods: {
+    routerChange() {
+      this.$store.dispatch('ROUTER_CHANGE', this.$route.path)
+      console.log('----');
+    }
+  },
+  created() {
+    this.routerChange()
+  },
+  watch: {
+    '$route': function() {
+      this.routerChange()
+    }
   }
 }
 </script>
 
 <style>
 #app {
-  text-align: center;
-}
-
-.footer {
-  padding: 20px 0;
   text-align: center;
 }
 </style>
