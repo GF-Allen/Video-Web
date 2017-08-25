@@ -9,7 +9,7 @@ import axios from "axios";
 import store from "./store";
 import MuseUI from 'muse-ui';
 import 'muse-ui/dist/muse-ui.css';
-import 'muse-ui/dist/theme-teal.css';
+// import 'muse-ui/dist/theme-teal.css';
 
 Vue.config.productionTip = false;
 // Vue.use(MintUI);

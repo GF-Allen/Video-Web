@@ -12,7 +12,7 @@ export default new Router({
             component: Home
         },
         {
-            path: '/home/:id',
+            path: '/home/:type',
             component: Home
         }
     ]

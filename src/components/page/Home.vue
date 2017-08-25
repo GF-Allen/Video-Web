@@ -4,10 +4,11 @@
         <mu-refresh-control :refreshing="refreshing" :trigger="scroller" @refresh="getData" />
         <mu-grid-list class="gridlist-demo">
             <mu-grid-tile class="list-item" v-for="tile, index in list" :key="index">
-                <img :src="tile.cover_img" />
+                <img :src="tile.cover_img" onerror="this.src='/static/img/load.png'" />
                 <span slot="title">{{tile.title}}</span>
             </mu-grid-tile>
         </mu-grid-list>
+        <mu-float-button icon="keyboard_arrow_up" mini class="float-button" @click="backTop"/>
         <mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore" />
     </div>
 </template>
@@ -16,6 +17,7 @@
 export default {
     data() {
         return {
+            type: '1',
             loading: false,
             refreshing: false,
             scroller: null,
@@ -26,9 +28,13 @@ export default {
         }
     },
     methods: {
-        getData() {
+        getData(type) {
+            if (!type) {
+                type = this.type;
+            }
+            this.type = type;
             this.refreshing = true;
-            this.$http.get('/video/home/2/1')
+            this.$http.get('/video/home/' + this.type + '/1')
                 .then(result => {
                     this.list = result.data.result;
                     this.refreshing = false;
@@ -39,7 +45,7 @@ export default {
         },
         loadMore() {
             this.loading = true;
-            this.$http.get('/video/home/2/' + this.page)
+            this.$http.get('/video/home/' + this.type + '/' + this.page)
                 .then(result => {
                     Array.prototype.push.apply(this.list, result.data.result);
                     this.loading = false;
@@ -61,16 +67,33 @@ export default {
             this.toast = false
             if (this.toastTimer) clearTimeout(this.toastTimer)
         },
+        backTop() {
+            const dom = document.getElementsByTagName('body')[0]
+            const scrollTop = dom.scrollTop
+            for (var i = 60; i >= 0; i--) {
+                setTimeout((i => {
+                    return () => {
+                        dom.scrollTop = scrollTop * i / 60
+                    }
+                })(i), 1000 * (1 - i / 60))
+            }
+        }
     },
     mounted() {
         this.scroller = this.$el;
         this.getData();
     },
+    updated() {
+        let width = document.body.clientWidth;
+        let val = width * 200 / 300 + "px";
+        $(".list-item").height(val);
+    },
     watch: {
-        "list": () => {
-            let width = document.body.clientWidth;
-            let val = width * 180 / 250 + "px";
-            $(".list-item").height(val);
+        '$route'(to, from) {
+            $('body').scrollTop(0);
+            let type = to.path.split('/home/')[1];
+            this.list = [];
+            this.getData(type);
         }
     }
 }
@@ -103,5 +126,12 @@ export default {
 .gridlist-demo img {
     width: 100%;
     height: 100%;
+}
+
+.float-button {
+    position: fixed;
+    height: 40px;
+    bottom: 100px;
+    right: 50px;
 }
 </style>

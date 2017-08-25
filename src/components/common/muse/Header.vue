@@ -1,7 +1,7 @@
 <template>
     <mu-appbar class="appbar" :title="title">
-        <mu-icon-button slot="left"><i class="material-icons">home</i></mu-icon-button>
-        <mu-icon-button slot="right"><i class="icon iconfont icon-icongithub"></i></mu-icon-button>
+        <mu-icon-button href="http://github.com/xiqingliu" slot="left"><i class="icon iconfont icon-icongithub"></i></mu-icon-button>
+        <mu-icon-button slot="right"><i class="material-icons">search</i></mu-icon-button>
     </mu-appbar>
 </template>
 <script>
