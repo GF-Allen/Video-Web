@@ -11,7 +11,6 @@ import MuseUI from 'muse-ui';
 import 'muse-ui/dist/muse-ui.css';
 import 'muse-ui/dist/theme-teal.css';
 
-
 Vue.config.productionTip = false;
 // Vue.use(MintUI);
 Vue.use(MuseUI);
@@ -20,7 +19,7 @@ Vue.use(MuseUI);
 axios.defaults.baseURL = "/api";
 axios.interceptors.request.use(
     config => {
-        store.dispatch("SHOWLOADING");
+        // store.dispatch("SHOWLOADING");
         return config;
     },
     err => {
@@ -29,7 +28,7 @@ axios.interceptors.request.use(
 );
 axios.interceptors.response.use(
     config => {
-        store.dispatch("HIDELOADING");
+        // store.dispatch("HIDELOADING");
         return config;
     },
     err => {

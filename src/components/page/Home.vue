@@ -8,7 +8,7 @@
                 <span slot="title">{{tile.title}}</span>
             </mu-grid-tile>
         </mu-grid-list>
-        <mu-infinite-scroll :scroller="scroller" :loading="loading" @loadMore="loadMore" />
+        <mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore" />
     </div>
 </template>
 
@@ -36,20 +36,18 @@ export default {
                 .catch(err => {
                     this.refreshing = false;
                 })
-
         },
         loadMore() {
-            this.showToast('加载更多');
-            // this.loading = true;
-            // this.$http.get('/video/home/2/' + this.page)
-            //     .then(result => {
-            //         this.list = result.data.result;
-            //         this.loading = false;
-            //         this.page++;
-            //     })
-            //     .catch(err => {
-            //         this.loading = false;
-            //     })
+            this.loading = true;
+            this.$http.get('/video/home/2/' + this.page)
+                .then(result => {
+                    Array.prototype.push.apply(this.list, result.data.result);
+                    this.loading = false;
+                    this.page++;
+                })
+                .catch(err => {
+                    this.loading = false;
+                })
         },
         showToast(msg) {
             this.toastMsg = msg
@@ -81,13 +79,16 @@ export default {
 
 <style>
 .video-content {
+    width: 100%;
+    height: 100%;
     margin-top: 56px;
     margin-bottom: 56px;
     display: flex;
     position: relative;
     flex-wrap: wrap;
     justify-content: space-around;
-    overflow-y: hidden;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .page-tabbar-container {

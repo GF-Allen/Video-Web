@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <top class="top"></top>
+    <top class="top" v-show="headerHide"></top>
     <router-view></router-view>
-    <foot class="foot"></foot>
+    <foot class="foot" v-show="footerHide"></foot>
   </div>
 </template>
 
@@ -14,7 +14,7 @@ import {mapGetters} from 'vuex'
 export default {
   name: 'app',
   computed:{
-    ...mapGetters(['footerHide','headerHide'])
+    ...mapGetters(['headerHide','footerHide'])
   },
   components: {
     Top,
