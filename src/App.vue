@@ -1,33 +1,24 @@
 <template>
   <div id="app">
-    <top></top>
+    <top class="top"></top>
     <router-view></router-view>
-    <foot></foot>
+    <foot class="foot"></foot>
   </div>
 </template>
 
 <script>
-import Top from './components/common/Header.vue'
-import Foot from './components/common/Footer.vue'
+import Top from './components/common/muse/Header.vue'
+import Foot from './components/common/muse/Footer.vue'
+import {mapGetters} from 'vuex'
+
 export default {
   name: 'app',
+  computed:{
+    ...mapGetters(['footerHide','headerHide'])
+  },
   components: {
     Top,
     Foot
-  },
-  methods: {
-    routerChange() {
-      this.$store.dispatch('ROUTER_CHANGE', this.$route.path)
-      console.log('----');
-    }
-  },
-  created() {
-    this.routerChange()
-  },
-  watch: {
-    '$route': function() {
-      this.routerChange()
-    }
   }
 }
 </script>
@@ -35,5 +26,10 @@ export default {
 <style>
 #app {
   text-align: center;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 </style>

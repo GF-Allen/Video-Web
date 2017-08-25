@@ -23,11 +23,12 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import {mapMutations} from 'vuex'
 export default {
     name: "Footer",
     data() {
         return {
-            selected: 'type_1',
+            // selected: 'type_1',
             title: {
                 "type_1": "电影",
                 "type_2": "电视",
@@ -38,7 +39,11 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'footerHide'
+            'footerHide',
+            'selected'
+        ]),
+        ...mapMutations([
+            
         ]),
         selectTitle: function() {
             return this.title[this.selected]

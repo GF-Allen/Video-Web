@@ -3,13 +3,18 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router";
-import MintUI from "mint-ui";
-import "mint-ui/lib/style.css";
+// import MintUI from "mint-ui";
+// import "mint-ui/lib/style.css";
 import axios from "axios";
 import store from "./store";
+import MuseUI from 'muse-ui';
+import 'muse-ui/dist/muse-ui.css';
+import 'muse-ui/dist/theme-teal.css';
+
 
 Vue.config.productionTip = false;
-Vue.use(MintUI);
+// Vue.use(MintUI);
+Vue.use(MuseUI);
 
 //配置axios
 axios.defaults.baseURL = "/api";
