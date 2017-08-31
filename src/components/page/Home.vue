@@ -4,9 +4,9 @@
         <mu-refresh-control :refreshing="refreshing" :trigger="scroller" @refresh="getData" />
         <mu-grid-list class="gridlist-demo">
             <mu-grid-tile class="list-item" v-for="tile, index in list" :key="index">
-                <router-link :to="'/video/'+tile.movie_id">
+                <a @click="goVideo(tile)">
                     <img :src="tile.cover_img" onerror="this.src='/static/img/load.png'" />
-                </router-link>
+                </a>
                 <span slot="title">{{tile.title}}</span>
             </mu-grid-tile>
         </mu-grid-list>
@@ -44,6 +44,10 @@ export default {
                 .catch(err => {
                     this.refreshing = false;
                 })
+        },
+        goVideo(tile){
+            this.$router.push('/video/'+tile.movie_id);
+            this.$store.commit("TITLE_CHANGE", tile.title);
         },
         loadMore() {
             this.loading = true;

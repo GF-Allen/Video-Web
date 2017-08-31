@@ -1,9 +1,9 @@
 <template>
-    <!-- <iframe id="iframe_player" width="100%" :src="src" frameborder="0" border="0" marginwidth="0" marginheight="0" scrolling="no">
-            </iframe> -->
-    <div id="iframe_player">
+    <iframe id="iframe_player" width="100%" :src="src" frameborder="0" border="0" marginwidth="0" marginheight="0" scrolling="no">
+                </iframe>
+    <!-- <div id="iframe_player">
 
-    </div>
+    </div> -->
 </template>
 <script>
 export default {
@@ -19,26 +19,6 @@ export default {
             } else {
                 this.src = url;
             }
-            console.log(this.src);
-            $.ajax(this.src, {
-                dataType: 'html',
-                crossDomain: true,
-                success: data => {
-                    console.log("success");
-                    if (data && data.resultcode == '200') {
-                        console.log(data.result);
-                    }
-                },
-                error: err => {
-                    console.log("err");
-                }
-            })
-            // this.$http.get(this.src)
-            //         .then(res => {
-            //             console.log(res.data);
-            //         }).catch(err => {
-            //             console.log(err);
-            //         })
         }
     },
     mounted() {

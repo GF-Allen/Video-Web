@@ -37,7 +37,7 @@ export default {
             this.refreshing = true;
             this.$http.get("/video/lines/" + this.id)//todo this.id 返回结果不一致
                 .then(result => {
-                    this.list = result.data.result;
+                    this.list = result.data.result.line_data;
                     if (this.list && this.list.length > 0) {
                         this.activeTab = this.list[0].line_name;
                     }
@@ -70,11 +70,11 @@ export default {
             el.height(el.width() * 9 / 16);
         },
         showToast(msg) {
-            this.toastMsg = msg
-            this.toast = true
-            if (this.toastTimer) clearTimeout(this.toastTimer)
+            this.toastMsg = msg;
+            this.toast = true;
+            if (this.toastTimer) clearTimeout(this.toastTimer);
             this.toastTimer = setTimeout(() => {
-                this.toast = false
+                this.toast = false;
             }, 1500)
         },
         hideToast() {
@@ -97,10 +97,6 @@ export default {
     display: flex;
     width: 100%;
     margin-top: 56px;
-}
-
-.tab_lines {
-    margin-top: 10px;
 }
 
 .tab_content {
