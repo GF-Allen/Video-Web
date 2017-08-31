@@ -4,11 +4,13 @@
         <mu-refresh-control :refreshing="refreshing" :trigger="scroller" @refresh="getData" />
         <mu-grid-list class="gridlist-demo">
             <mu-grid-tile class="list-item" v-for="tile, index in list" :key="index">
-                <img :src="tile.cover_img" onerror="this.src='/static/img/load.png'" />
+                <router-link :to="'/video/'+tile.movie_id">
+                    <img :src="tile.cover_img" onerror="this.src='/static/img/load.png'" />
+                </router-link>
                 <span slot="title">{{tile.title}}</span>
             </mu-grid-tile>
         </mu-grid-list>
-        <mu-float-button icon="keyboard_arrow_up" mini class="float-button" @click="backTop"/>
+        <mu-float-button icon="keyboard_arrow_up" mini class="float-button" @click="backTop" />
         <mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore" />
     </div>
 </template>
@@ -24,7 +26,7 @@ export default {
             list: [],
             page: 2,
             toastMsg: '',
-            toast: false,
+            toast: false
         }
     },
     methods: {
