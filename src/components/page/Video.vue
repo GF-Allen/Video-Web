@@ -5,15 +5,9 @@
         <div id="player_content">
             <router-view></router-view>
         </div>
-        <div class="tab_lines">
-            <mu-tabs :value="activeTab" @change="handleTabChange">
-                <mu-tab v-for="item,index in list" :key="index" :value="item.line_name" :title="item.line_name" />
-            </mu-tabs>
-            <div class="tab_content" v-for="item,index in list" :key="index" v-if="activeTab === item.line_name">
-                <!-- <mu-paper :zDepth="1" class="lines_des" v-for="line,i in item.lines" :key="i">
-                        <span>{{line.video_name}}</span>
-                    </mu-paper> -->
-                <mu-raised-button class="lines_des" @click="getPlayer(item,line._id)" v-for="line,i in item.lines" :key="i" :label="line.video_name" />
+        <div class="tab_lines" >
+            <div class="tab_content" >
+                <mu-raised-button class="lines_des" @click="getPlayer(item.player_url)" :label="item.player_title" v-for="item,index in list.player_urls" :key="index" />
             </div>
         </div>
     </div>
@@ -35,12 +29,9 @@ export default {
     methods: {
         loadData() {
             this.refreshing = true;
-            this.$http.get("/video/lines/" + this.id)//todo this.id 返回结果不一致
+            this.$http.get("/videos/" + this.id + "/urls")//todo this.id 返回结果不一致
                 .then(result => {
-                    this.list = result.data.result.line_data;
-                    if (this.list && this.list.length > 0) {
-                        this.activeTab = this.list[0].line_name;
-                    }
+                    this.list = result.data.result;
                     this.refreshing = false;
                 })
                 .catch(err => {
@@ -48,19 +39,8 @@ export default {
                     this.refreshing = false;
                 })
         },
-        getPlayer(lines, lineId) {
-            this.refreshing = true;
-            let url = "/video/player/" + lines._id + "/" + lineId;
-            this.$http.get(url)
-                .then(result => {
-                    let playerUrl = result.data.result;
-                    this.refreshing = false;
-                    this.$router.replace({path:"/video/"+lines.movie_id+"/player",query:{url:playerUrl}});
-                })
-                .catch(err => {
-                    this.showToast("网络错误");
-                    this.refreshing = false;
-                })
+        getPlayer(url) {
+            this.$router.replace({path:"/video/"+this.id+"/player",query:{url:url}});
         },
         handleTabChange(val) {
             this.activeTab = val;

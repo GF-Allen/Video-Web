@@ -5,7 +5,7 @@
         <mu-grid-list class="gridlist-demo">
             <mu-grid-tile class="list-item" v-for="tile, index in list" :key="index">
                 <a @click="goVideo(tile)">
-                    <img :src="tile.cover_img" onerror="this.src='/static/img/load.png'" />
+                    <img :src="tile.pic" onerror="this.src='/static/img/load.png'" />
                 </a>
                 <span slot="title">{{tile.title}}</span>
             </mu-grid-tile>
@@ -36,9 +36,10 @@ export default {
             }
             this.type = type;
             this.refreshing = true;
-            this.$http.get('/video/home/' + this.type + '/1')
+            this.$http.get('/videos?type=' + this.type)
                 .then(result => {
                     this.list = result.data.result;
+                    console.log(this.list);
                     this.refreshing = false;
                 })
                 .catch(err => {
@@ -46,12 +47,12 @@ export default {
                 })
         },
         goVideo(tile){
-            this.$router.push('/video/'+tile.movie_id);
+            this.$router.push('/video/'+tile.video_id);
             this.$store.commit("TITLE_CHANGE", tile.title);
         },
         loadMore() {
             this.loading = true;
-            this.$http.get('/video/home/' + this.type + '/' + this.page)
+            this.$http.get('/videos/' + this.type)
                 .then(result => {
                     Array.prototype.push.apply(this.list, result.data.result);
                     this.loading = false;

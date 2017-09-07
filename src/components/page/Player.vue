@@ -14,11 +14,7 @@ export default {
     },
     methods: {
         handleUrl(url) {
-            if (url.indexOf('http') > 0) {
-                this.src = 'http://www.rejuwang.com' + url;
-            } else {
-                this.src = url;
-            }
+            this.src = url;
         }
     },
     mounted() {
