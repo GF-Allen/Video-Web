@@ -10,12 +10,16 @@
                 <span slot="title">{{tile.title}}</span>
             </mu-grid-tile>
         </mu-grid-list>
-        <mu-float-button icon="keyboard_arrow_up" mini class="float-button" @click="backTop" />
+        <!-- <mu-float-button icon="keyboard_arrow_up" mini class="float-button" @click="backTop" /> -->
+        <mu-back-top/>
         <mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore" />
+        
     </div>
 </template>
 
 <script>
+import Foot from '../common/muse/Footer.vue'
+import ConStant from '../../utils/constant'
 export default {
     data() {
         return {
@@ -29,6 +33,9 @@ export default {
             toast: false
         }
     },
+    components: {
+        Foot
+    },
     methods: {
         getData(type) {
             if (!type) {
@@ -36,23 +43,23 @@ export default {
             }
             this.type = type;
             this.refreshing = true;
-            this.$http.get('/videos?type=' + this.type)
+            this.$http.get('/videos?page=' + 1 + '&page_size=' + ConStant.default_page_size + '&type=' + this.type)
                 .then(result => {
                     this.list = result.data.result;
-                    console.log(this.list);
                     this.refreshing = false;
                 })
                 .catch(err => {
                     this.refreshing = false;
                 })
         },
-        goVideo(tile){
-            this.$router.push('/video/'+tile.video_id);
+        goVideo(tile) {
+            this.$router.push('/video/' + tile.video_id);
             this.$store.commit("TITLE_CHANGE", tile.title);
         },
         loadMore() {
+            console.log('loadmore');
             this.loading = true;
-            this.$http.get('/videos/' + this.type)
+            this.$http.get('/videos?page=' + this.page + '&page_size=' + ConStant.default_page_size + '&type=' + this.type)
                 .then(result => {
                     Array.prototype.push.apply(this.list, result.data.result);
                     this.loading = false;
@@ -100,6 +107,7 @@ export default {
             $('body').scrollTop(0);
             let type = to.path.split('/home/')[1];
             this.list = [];
+            this.page = 2;
             this.getData(type);
         }
     }
@@ -111,7 +119,7 @@ export default {
 .video-content {
     width: 100%;
     height: 100%;
-    margin-top: 56px;
+    /* margin-top: 56px; */
     margin-bottom: 56px;
     display: flex;
     position: relative;
@@ -141,4 +149,5 @@ export default {
     bottom: 100px;
     right: 50px;
 }
+
 </style>

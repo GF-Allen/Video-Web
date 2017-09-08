@@ -1,4 +1,4 @@
-import { TITLE_CHANGE, ROUTER_CHANGE, BOTTOMVAL_CHANGE } from "./types";
+import * as types from './types'
 
 const type = {
     "1": "电影",
@@ -15,16 +15,20 @@ const state = {
 };
 
 const mutations = {
-    [ROUTER_CHANGE](state, type) {
+    [types.ROUTER_CHANGE](state, type) {
         state.footerHide = true;
         state.headerHide = true;
     },
-    [TITLE_CHANGE](state, val) {
+    [types.TITLE_CHANGE](state, val) {
         state.title = val;
     },
-    [BOTTOMVAL_CHANGE](state, val) {
+    [types.BOTTOMVAL_CHANGE](state, val) {
         state.bottomval = val;
         state.title = type[val];
+    },
+    [types.HEADER_FOOTER_CHANGE](state,headerHide,footerHide){
+        state.headerHide = headerHide;
+        state.footerHide = footerHide;
     }
 };
 

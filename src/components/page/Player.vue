@@ -1,9 +1,6 @@
 <template>
-    <iframe id="iframe_player" width="100%" :src="src" frameborder="0" border="0" marginwidth="0" marginheight="0" scrolling="no">
-                </iframe>
-    <!-- <div id="iframe_player">
-
-    </div> -->
+    <iframe id="iframe_player" width="100%" height="100%" :src="src" frameborder="0" border="0" marginwidth="0" marginheight="0" scrolling="no">
+    </iframe>
 </template>
 <script>
 export default {
@@ -29,5 +26,6 @@ export default {
     }
 }
 </script>
+
 
 
